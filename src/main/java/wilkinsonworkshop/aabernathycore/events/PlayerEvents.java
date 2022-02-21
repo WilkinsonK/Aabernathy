@@ -30,7 +30,7 @@ public class PlayerEvents extends AabernathyEvents {
         player.sendMessage(
                 this.renderGreeting(name),
                 MessageTemplate.withColor("Did you know, the server uses the Dynmap plugin??", ChatColor.DARK_GRAY),
-                MessageTemplate.withColor("The world map can be accessed from here: ", ChatColor.DARK_GRAY),
+                MessageTemplate.withColor("See Aabernathy in all of its glory by clicking here: ", ChatColor.DARK_GRAY),
                 MessageTemplate.withColor(ChatColor.UNDERLINE + "http://mine.wilkinson-workshop.tech", ChatColor.DARK_GRAY)
         );
     }
@@ -56,7 +56,7 @@ public class PlayerEvents extends AabernathyEvents {
 
     private static final MessageTemplate[] joinMessages = {
             new MessageTemplate("%s materializes from out of nowhere!"),
-            new MessageTemplate("Appearing from the void, %s, makes an entrance!"),
+            new MessageTemplate("Appearing from the void, %s makes an entrance!"),
             new MessageTemplate("%s suddenly exists, just as they always have.")
     };
 
