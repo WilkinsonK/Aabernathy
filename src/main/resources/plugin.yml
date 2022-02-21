@@ -1,0 +1,9 @@
+name: AabernathyCore
+version: '${version}'
+main: wilkinsonworkshop.aabernathycore.AabernathyCore
+api-version: 1.18
+prefix: AABERNATHY
+load: STARTUP
+authors: [ 'Keenan W. Wilkinson' ]
+description: Core functionality of mine.wilkinson-workshop.tech server. i.e. permissions mgmt, rankings, etc.
+website: www.wilkinson-workshop.tech

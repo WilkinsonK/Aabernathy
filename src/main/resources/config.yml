@@ -1,0 +1,14 @@
+# Default configuration config.yml
+ranks:
+  default_rank:
+    title:
+      name: Player
+      color: grey
+    permissions:
+      - build
+      - destroy
+  member_rank:
+    title:
+      name: Member
+      color: green
+    extends: default_rank
