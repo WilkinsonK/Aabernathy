@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.Random;
+
 public class PlayerEvents extends AabernathyEvents {
 
     @EventHandler
@@ -27,9 +29,9 @@ public class PlayerEvents extends AabernathyEvents {
         event.setJoinMessage(this.renderJoinMessage(name));
         player.sendMessage(
                 this.renderGreeting(name),
-                withColor("Did you know, the server uses the Dynmap plugin??", ChatColor.DARK_GRAY),
-                withColor("The world map can be accessed from here: ", ChatColor.DARK_GRAY),
-                withColor(ChatColor.UNDERLINE + "http://mine.wilkinson-workshop.tech", ChatColor.DARK_GRAY)
+                MessageTemplate.withColor("Did you know, the server uses the Dynmap plugin??", ChatColor.DARK_GRAY),
+                MessageTemplate.withColor("The world map can be accessed from here: ", ChatColor.DARK_GRAY),
+                MessageTemplate.withColor(ChatColor.UNDERLINE + "http://mine.wilkinson-workshop.tech", ChatColor.DARK_GRAY)
         );
     }
 
@@ -39,18 +41,48 @@ public class PlayerEvents extends AabernathyEvents {
     }
 
     private String renderGreeting(String name) {
-        return String.format("Hello %s, Welcome to Aabernathy!", withColor(name, ChatColor.GREEN));
+        return String.format("Hello %s, Welcome to Aabernathy!", MessageTemplate.withColor(name, ChatColor.GREEN));
     }
 
     private String renderQuitMessage(String name) {
-        return String.format("%s vanishes into thin air...", withColor(name, ChatColor.RED));
+        MessageTemplate template = getMessageTemplate(quitMessages);
+        return template.renderMessage(MessageTemplate.withColor(name, ChatColor.RED));
     }
 
     private String renderJoinMessage(String name) {
-        return String.format("%s materializes from out of nowhere!", withColor(name, ChatColor.GREEN));
+        MessageTemplate template = getMessageTemplate(joinMessages);
+        return template.renderMessage(MessageTemplate.withColor(name, ChatColor.GREEN));
     }
 
-    private static String withColor(String value, ChatColor color) {
+    private static final MessageTemplate[] joinMessages = {
+            new MessageTemplate("%s materializes from out of nowhere!"),
+            new MessageTemplate("Appearing from the void, %s, makes an entrance!"),
+            new MessageTemplate("%s suddenly exists, just as they always have.")
+    };
+
+    private static final MessageTemplate[] quitMessages = {
+            new MessageTemplate("%s vanishes into thin air..."),
+            new MessageTemplate("And like that, %s no longer exists."),
+            new MessageTemplate("Light momentarily bends around the spot %s once stood, they disappear without a trace!")
+    };
+
+    private static MessageTemplate getMessageTemplate(MessageTemplate[] array) {
+        return array[new Random().nextInt(array.length)];
+    }
+}
+
+class MessageTemplate {
+    private String template;
+
+    public MessageTemplate(String template) {
+        this.template = template;
+    }
+
+    public String renderMessage(String message) {
+        return String.format(this.template, message);
+    }
+
+    public static String withColor(String value, ChatColor color) {
         return String.format("%s%s%s", color, value, ChatColor.RESET);
     }
 }
