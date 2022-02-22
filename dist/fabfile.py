@@ -29,6 +29,7 @@ def local(cmd: list[str], **kwargs):
     out, err = proc.communicate()
     return out, err
 
+
 def gradle(cmd: str, **kwargs):
     """Execute gradle command."""
     out, err = local(["./gradlew", cmd], cwd="..")
