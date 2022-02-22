@@ -27,11 +27,13 @@ public class PlayerEvents extends AabernathyEvents {
     private void greetPlayer(PlayerJoinEvent event, Player player) {
         String name = player.getDisplayName();
         event.setJoinMessage(this.renderJoinMessage(name));
+
+        MessageTemplate template = new MessageTemplate("%s", ChatColor.GRAY);
         player.sendMessage(
                 this.renderGreeting(name),
-                MessageTemplate.withColor("Did you know, the server uses the Dynmap plugin??", ChatColor.DARK_GRAY),
-                MessageTemplate.withColor("See Aabernathy in all of its glory by clicking here: ", ChatColor.DARK_GRAY),
-                MessageTemplate.withColor(ChatColor.UNDERLINE + "http://mine.wilkinson-workshop.tech", ChatColor.DARK_GRAY)
+                template.render("Did you know, the server uses the Dynmap plugin??"),
+                template.render("See Aabernathy in all of its glory by clicking here:"),
+                template.render("http://mine.wilkinson-workshop.tech", ChatColor.UNDERLINE)
         );
     }
 
@@ -41,17 +43,17 @@ public class PlayerEvents extends AabernathyEvents {
     }
 
     private String renderGreeting(String name) {
-        return String.format("Hello %s, Welcome to Aabernathy!", MessageTemplate.withColor(name, ChatColor.GREEN));
+        return new MessageTemplate("Hello %s, Welcome to Aabernathy!").render(name, ChatColor.GREEN);
     }
 
     private String renderQuitMessage(String name) {
         MessageTemplate template = getMessageTemplate(quitMessages);
-        return template.renderMessage(MessageTemplate.withColor(name, ChatColor.RED));
+        return template.render(name, ChatColor.RED);
     }
 
     private String renderJoinMessage(String name) {
         MessageTemplate template = getMessageTemplate(joinMessages);
-        return template.renderMessage(MessageTemplate.withColor(name, ChatColor.GREEN));
+        return template.render(name, ChatColor.GREEN);
     }
 
     private static final MessageTemplate[] joinMessages = {
@@ -73,16 +75,54 @@ public class PlayerEvents extends AabernathyEvents {
 
 class MessageTemplate {
     private String template;
+    private String templateStyling;
+
+    @Override
+    public String toString() {
+        return this.render("");
+    }
+
+    public MessageTemplate() {
+        this.initMessageTemplate("%s", ChatColor.RESET.toString());
+    }
 
     public MessageTemplate(String template) {
-        this.template = template;
+        this.initMessageTemplate(template, ChatColor.RESET.toString());
     }
 
-    public String renderMessage(String message) {
-        return String.format(this.template, message);
+    public MessageTemplate(String template, ChatColor... styles) {
+        this.initMessageTemplate(template, renderStyle(styles));
     }
 
-    public static String withColor(String value, ChatColor color) {
-        return String.format("%s%s%s", color, value, ChatColor.RESET);
+    private void initMessageTemplate(String template, String templateStyling) {
+        this.templateStyling = templateStyling;
+        this.template        = this.withStyle(template, this.templateStyling);
+    }
+
+    public String render(String message) {
+        String rend = this.withStyle(this.template, this.templateStyling);
+        return String.format(rend, message);
+    }
+
+    public String render(String message, ChatColor... styles) {
+        message = this.withStyle(message, styles);
+        return this.render(message);
+    }
+
+    private static String renderStyle(ChatColor... styles) {
+        StringBuilder prerender = new StringBuilder();
+        for (Object style : styles) {
+            prerender.append(style.toString());
+        }
+        return prerender.toString();
+    }
+
+    public String withStyle(String value, ChatColor... styling) {
+        return this.withStyle(value, renderStyle(styling));
+    }
+
+    private String withStyle(String value, String styling) {
+        if (value.length() < 1) { return value; }
+        return String.format("%s%s%s", styling, value, this.templateStyling);
     }
 }
