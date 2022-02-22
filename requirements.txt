@@ -1,3 +1,0 @@
-fabric
-pydantic
-python-dotenv
