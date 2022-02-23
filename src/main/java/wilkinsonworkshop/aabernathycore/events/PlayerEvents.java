@@ -122,6 +122,7 @@ class MessageTemplate {
     }
 
     private String withStyle(String value, String styling) {
+        // add a comment
         if (value.length() < 1) { return value; }
         return String.format("%s%s%s", styling, value, this.templateStyling);
     }
