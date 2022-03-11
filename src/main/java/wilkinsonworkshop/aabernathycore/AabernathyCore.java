@@ -12,6 +12,7 @@ public final class AabernathyCore extends JavaPlugin {
         // Plugin startup logic
         AabernathyConfig.loadStatic(this);
         AabernathyEvents.loadStatic(this, eventListeners);
+
     }
 
     @Override
