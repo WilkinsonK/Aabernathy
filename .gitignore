@@ -123,3 +123,5 @@ run/
 .venv
 *.env
 
+# VSCode directories and files
+.vscode

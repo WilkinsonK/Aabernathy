@@ -1,14 +1,11 @@
 package wilkinsonworkshop.aabernathycore.config;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class AabernathyConfig {
     static private boolean configLoaded = false;
 
     static private JavaPlugin        parent;
-    static private FileConfiguration config;
-
     /**
      * Statically load plugin configuration, setting defaults
      * and validating incoming values.
@@ -43,7 +40,6 @@ public class AabernathyConfig {
 
     private static void setStaticValues(JavaPlugin plugin) {
         parent = plugin;
-        config = parent.getConfig();
+        parent.getConfig();
     }
-
 }

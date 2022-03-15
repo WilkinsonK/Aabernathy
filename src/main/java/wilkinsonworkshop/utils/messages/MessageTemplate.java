@@ -68,7 +68,7 @@ public class MessageTemplate {
 }
 
 class MapKeyWord {
-    private static final String formatString = "{%s}"; // to initialize keyword as.
+    private static final String formatString = "\\{%s\\}"; // to initialize keyword as.
     private final String keyword;
 
     public String toString() {
