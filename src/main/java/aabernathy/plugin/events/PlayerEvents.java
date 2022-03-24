@@ -1,29 +1,28 @@
-package wilkinsonworkshop.aabernathycore.events;
+package aabernathy.plugin.events;
 
+import aabernathy.utils.events.AabernathyListener;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import wilkinsonworkshop.utils.messages.MessageObject;
-import wilkinsonworkshop.utils.messages.MessageTemplate;
+import aabernathy.utils.messages.MessageObject;
+import aabernathy.utils.messages.MessageTemplate;
 
 import java.util.HashMap;
 import java.util.Random;
 
-public class PlayerEvents extends AabernathyEvents {
+public class PlayerEvents extends AabernathyListener {
 
     @EventHandler
     public static void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
         s_greetPlayer(event, player);
     }
 
     @EventHandler
     public static void onPlayerExit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-
         s_dismissPlayer(event, player);
     }
 

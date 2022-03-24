@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'WilkinsonWorkshop'
+group = 'Aabernathy'
 version = '0.0.0'
 
 repositories {

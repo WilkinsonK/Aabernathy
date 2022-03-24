@@ -1,4 +1,4 @@
-package wilkinsonworkshop.utils.messages;
+package aabernathy.utils.messages;
 
 public interface MessageComponent {
     public String digest();
