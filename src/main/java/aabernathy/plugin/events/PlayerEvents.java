@@ -36,7 +36,7 @@ public class PlayerEvents extends AabernathyListener {
                 s_renderMOTD("with other players of the community?? Click on the below"),
                 s_renderMOTD("to see all that Aabernathy has to offer:"),
                 s_renderLinkMessage("DISCORD", "https://discord.gg/G5mtAd8a8a"),
-                s_renderLinkMessage("DYNMAP", "http://mine.wilkinson-workshop.tech/map/")
+                s_renderLinkMessage("DYNMAP", "http://www.wilkinson-workshop.tech/minecraft/map/")
         );
     }
 
